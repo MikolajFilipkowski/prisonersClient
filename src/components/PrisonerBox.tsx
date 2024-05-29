@@ -9,7 +9,7 @@ export default function PrisonerBox({prisonerInfo, setCurPage, setPrisonerInfo, 
 }) {
 
     function clickHandler() {
-        if (!(prisonerInfo.prisonerNumber && prisonerInfo.sentence && prisonerInfo.name && prisonerInfo.lastname && prisonerInfo.cause)) {
+        if (!(prisonerInfo.prisonerNumber && prisonerInfo.sentence && prisonerInfo.name && prisonerInfo.cause)) {
             errorHandler("Niepoprawne dane więźnia")
         } else {
             setPrisonerInfo(prisonerInfo)
@@ -20,7 +20,7 @@ export default function PrisonerBox({prisonerInfo, setCurPage, setPrisonerInfo, 
     return (
         <div className="prisonerContainer" onClick={clickHandler}>
             <img src="./prisoner.png" width={50}/>
-            <span>{prisonerInfo.name} {prisonerInfo.lastname}</span>
+            <span>{prisonerInfo.name}</span>
         </div>
     )
 }
