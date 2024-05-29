@@ -3,7 +3,7 @@ import "./LoginPage.css"
 
 export default function LoginPage({setCurPage, errorHandler} : {
     setCurPage: React.Dispatch<React.SetStateAction<string>>,
-    errorHandler: VoidFunction
+    errorHandler: Function
 }) {
 
     const [login, setLogin] = useState("")
@@ -14,7 +14,7 @@ export default function LoginPage({setCurPage, errorHandler} : {
             setCurPage("info")
         }
         else {
-            errorHandler()
+            errorHandler("Błędne dane logowania")
         }
     }
 

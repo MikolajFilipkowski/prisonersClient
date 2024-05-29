@@ -12,8 +12,8 @@ function App() {
 
   const [error, setError] = useState("")
 
-  function errorHandler() {
-    setError("Błędne dane logowania")
+  function errorHandler(error:string) {
+    setError(error)
   }
 
   return (
@@ -31,7 +31,7 @@ function App() {
         <LoginPage setCurPage={setCurPage} errorHandler={errorHandler}/>
       }
       { curPage==="info" &&
-        <InfoPage setCurPage={setCurPage} setPrisonerInfo={setPrisonerInfo}/>
+        <InfoPage setCurPage={setCurPage} setPrisonerInfo={setPrisonerInfo} errorHandler={errorHandler}/>
       }
       { curPage==="details" &&
         <DetailsPage setCurPage={setCurPage} prisonerInfo={prisonerInfo} setPrisonerInfo={setPrisonerInfo}/>
