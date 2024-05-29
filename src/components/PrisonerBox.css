@@ -1,0 +1,15 @@
+.prisonerContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 30px 20px;
+    cursor: pointer;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(243, 244, 245);
+}
+
+.prisonerContainer img {
+    width: 100px;
+}

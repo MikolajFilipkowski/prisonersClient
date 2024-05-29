@@ -3,9 +3,12 @@ import './App.css'
 import LoginPage from './pages/LoginPage'
 import InfoPage from './pages/InfoPage'
 import DetailsPage from './pages/DetailsPage'
+import info from "./pages/info.json"
 
 function App() {
-  const [curPage, setCurPage] = useState("login")
+  const [curPage, setCurPage] = useState("info")
+
+  const [prisonerInfo, setPrisonerInfo] = useState(info[0])
 
   const [error, setError] = useState("")
 
@@ -28,10 +31,10 @@ function App() {
         <LoginPage setCurPage={setCurPage} errorHandler={errorHandler}/>
       }
       { curPage==="info" &&
-        <InfoPage/>
+        <InfoPage setCurPage={setCurPage} setPrisonerInfo={setPrisonerInfo}/>
       }
       { curPage==="details" &&
-        <DetailsPage/>
+        <DetailsPage setCurPage={setCurPage} prisonerInfo={prisonerInfo} setPrisonerInfo={setPrisonerInfo}/>
       }
     </div>
   )
