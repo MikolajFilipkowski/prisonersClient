@@ -1,11 +1,11 @@
-.detailsPageContainer {
+.addPageContainer {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100%;
 }
 
-.detailsBaseContainer {
+.addBaseContainer {
     width: 50%;
     border-radius: 20px;
     padding: 20px 20px;
@@ -18,45 +18,46 @@
     align-items: center;
 }
 
+.addFormContainer {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+
+
 .exitIconContainer {
     align-self: flex-end;
     cursor: pointer;
 }
 
-.dataContainer {
-    display: flex;
-    flex-direction: column;
-    gap:5px;
-}
-
-.formInput {
+.addInput {
     border: none;
     border-bottom: 1px solid black;
     width: 150px;
 }
 
-.formNumberInput {
+.addNumberInput {
     width: 30px;
     padding: 0;
 }
 
-.clearButton {
-    background-color: transparent;
+.addButton {
     border: none;
-    cursor: pointer;
-    font-size: 32px;
-}
-
-.deleteButton {
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    font-size: 18px;
+    border-radius: 20px;
+    background-color: rgb(3, 111, 14);
+    color:white;
+    padding: 15px 5px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.deleteButton:hover {
-    background-color: rgb(224, 1, 1);
+.addButton:hover {
+    background-color: rgb(5, 132, 18);
+}
+
+.addBaseContainer h1 {
+    margin: 0;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }

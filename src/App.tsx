@@ -4,9 +4,10 @@ import LoginPage from './pages/LoginPage'
 import InfoPage from './pages/InfoPage'
 import DetailsPage from './pages/DetailsPage'
 import info from "./pages/info.json"
+import AddPage from './pages/AddPage'
 
 function App() {
-  const [curPage, setCurPage] = useState("info")
+  const [curPage, setCurPage] = useState("login")
 
   const [prisonerInfo, setPrisonerInfo] = useState(info[0])
 
@@ -35,6 +36,9 @@ function App() {
       }
       { curPage==="details" &&
         <DetailsPage setCurPage={setCurPage} prisonerInfo={prisonerInfo} setPrisonerInfo={setPrisonerInfo}/>
+      }
+      { curPage==="add" &&
+        <AddPage setCurPage={setCurPage} errorHandler={errorHandler}/>
       }
     </div>
   )

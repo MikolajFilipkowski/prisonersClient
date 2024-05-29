@@ -9,9 +9,16 @@ export default function InfoPage({setCurPage, setPrisonerInfo, errorHandler} : {
   setPrisonerInfo: React.Dispatch<React.SetStateAction<Prisoner>>,
   errorHandler:Function
 }) {
+  function gotoAdd() {
+    setCurPage("add")
+  }
+
   return (
     <div className="infoPageContainer">
       <div className="infoBaseContainer">
+        <div className='addIconContainer'>
+          <button onClick={gotoAdd}>Dodaj więźnia</button>
+        </div>
         <h1>Lista więźniów</h1>
         <div className="prisonerListContainer">
           {

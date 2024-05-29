@@ -33,9 +33,9 @@
 }
 
 .loginFormContainer button {
-    background-color: blue;
+    background-color: rgb(37, 37, 248);
     box-shadow: none;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none;
     font-size: 18px;
     padding: 10px 20px;
