@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "./LoginPage.css"
+import logins from "./logins.json"
 
 export default function LoginPage({setCurPage, errorHandler} : {
     setCurPage: React.Dispatch<React.SetStateAction<string>>,
@@ -10,7 +11,7 @@ export default function LoginPage({setCurPage, errorHandler} : {
     const [password, setPassword] = useState("")
 
     function formHandler() {
-        if (login==="admin" && password==="qwerty") {
+        if (logins.find((v) => v.login===login && v.password===password)) {
             setCurPage("info")
         }
         else {

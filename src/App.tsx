@@ -43,6 +43,8 @@ function App() {
       })
       setPrisonerArray(prisonersAsType)
     } catch (error) {
+      errorHandler("Błąd ze strony serwera")
+      setCurPage("")
       console.error(error)
     }
   }
@@ -53,6 +55,10 @@ function App() {
     }
     refresh()
   }, [])
+
+  useEffect(() => {
+    setError("")
+  }, [curPage])
 
   return (
     <div className='appContainer'>
