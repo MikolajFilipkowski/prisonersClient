@@ -6,11 +6,12 @@ import { useState } from 'react'
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 
-export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo, errorHandler} : {
+export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo, errorHandler, refreshPrisoners} : {
   prisonerInfo:Prisoner,
   setCurPage: React.Dispatch<React.SetStateAction<string>>,
   setPrisonerInfo: React.Dispatch<React.SetStateAction<Prisoner>>,
-  errorHandler:Function
+  errorHandler:Function,
+  refreshPrisoners:Function
 }) {
   const [prisoner, setPrisoner] = useState(prisonerInfo)
   const [editable, setEditable] = useState(false)
@@ -21,9 +22,6 @@ export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo, 
 
   function handleEdit() {
     setEditable(true)
-    if (editable) {
-      console.log(prisoner)
-    }
   }
 
   function handleCancel() {
@@ -49,6 +47,7 @@ export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo, 
         const it = v.data[0]
         if (Object.hasOwn(it, "_id") && Object.hasOwn(it, "name") && Object.hasOwn(it, "sentence") && Object.hasOwn(it, "cause")) {
           setPrisonerInfo({prisonerNumber:it._id, name:it.name, sentence:it.sentence, cause:it.cause})
+          refreshPrisoners()
         } else {
           throw Error("Dane są w złym formacie")
         }
@@ -63,7 +62,17 @@ export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo, 
   }
 
   function handleDelete() {
-    setCurPage("info")
+    axios({
+      method:"delete",
+      url:`http://localhost:8080/api/users/${prisoner.prisonerNumber}`
+    }).then(() => {
+      refreshPrisoners()
+      setCurPage("info")
+    }, (err) => {
+      errorHandler("Nie udało się usunąć")
+      console.error(err)
+    })
+    
   }
 
   return (

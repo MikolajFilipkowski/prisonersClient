@@ -3,7 +3,6 @@ import './App.css'
 import LoginPage from './pages/LoginPage'
 import InfoPage from './pages/InfoPage'
 import DetailsPage from './pages/DetailsPage'
-import info from "./pages/info.json"
 import AddPage from './pages/AddPage'
 import { Prisoner } from './types'
 import axios from 'axios'
@@ -13,7 +12,7 @@ function App() {
 
   const [prisonerArray, setPrisonerArray] = useState<Array<Prisoner>>(new Array<Prisoner>)
 
-  const [prisonerInfo, setPrisonerInfo] = useState(info[0])
+  const [prisonerInfo, setPrisonerInfo] = useState<Prisoner>({prisonerNumber:"", name:"", sentence:0, cause:""})
 
   const [error, setError] = useState("")
 
@@ -29,8 +28,6 @@ function App() {
       })
 
       const prisoners = prisonersRes.data
-
-      console.log(prisoners)
 
       if (!Array.isArray(prisoners)) {
         throw Error("Response is not an array")
@@ -75,7 +72,7 @@ function App() {
         <InfoPage prisonerArray={prisonerArray} setCurPage={setCurPage} setPrisonerInfo={setPrisonerInfo} errorHandler={errorHandler}/>
       }
       { curPage==="details" &&
-        <DetailsPage setCurPage={setCurPage} prisonerInfo={prisonerInfo} setPrisonerInfo={setPrisonerInfo} errorHandler={errorHandler}/>
+        <DetailsPage setCurPage={setCurPage} prisonerInfo={prisonerInfo} setPrisonerInfo={setPrisonerInfo} errorHandler={errorHandler} refreshPrisoners={refreshPrisoners}/>
       }
       { curPage==="add" &&
         <AddPage setCurPage={setCurPage} errorHandler={errorHandler} refreshPrisoners={refreshPrisoners}/>
