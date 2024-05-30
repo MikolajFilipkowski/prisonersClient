@@ -4,11 +4,13 @@ import { Prisoner } from "../types"
 import "./DetailsPage.css"
 import { useState } from 'react'
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
-export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo} : {
+export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo, errorHandler} : {
   prisonerInfo:Prisoner,
   setCurPage: React.Dispatch<React.SetStateAction<string>>,
   setPrisonerInfo: React.Dispatch<React.SetStateAction<Prisoner>>,
+  errorHandler:Function
 }) {
   const [prisoner, setPrisoner] = useState(prisonerInfo)
   const [editable, setEditable] = useState(false)
@@ -30,7 +32,34 @@ export default function DetailsPage({prisonerInfo, setCurPage, setPrisonerInfo} 
   }
 
   function handleAccept() {
-    setEditable(false)
+    axios({
+      method:"put",
+      url:`http://localhost:8080/api/users/${prisoner.prisonerNumber}`,
+      data:{
+        name:prisoner.name,
+        sentence:prisoner.sentence,
+        cause:prisoner.cause
+      }
+    }).then(() => {
+      setEditable(false)
+      axios({
+        method:"get",
+        url:`http://localhost:8080/api/users/${prisoner.prisonerNumber}`
+      }).then((v) => {
+        const it = v.data[0]
+        if (Object.hasOwn(it, "_id") && Object.hasOwn(it, "name") && Object.hasOwn(it, "sentence") && Object.hasOwn(it, "cause")) {
+          setPrisonerInfo({prisonerNumber:it._id, name:it.name, sentence:it.sentence, cause:it.cause})
+        } else {
+          throw Error("Dane są w złym formacie")
+        }
+      }, (err) => {
+        errorHandler("Błąd ze strony serwera")
+        console.error(err)
+      })
+    }, (err) => {
+      errorHandler("Błędne dane")
+      console.error(err)
+    })
   }
 
   function handleDelete() {

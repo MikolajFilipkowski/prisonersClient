@@ -36,13 +36,13 @@ function App() {
         throw Error("Response is not an array")
       } else {
         if (!prisoners.every(it => {
-          return Object.hasOwn(it, "_id") && Object.hasOwn(it, "name") && Object.hasOwn(it, "sentance") && Object.hasOwn(it, "cause")
+          return Object.hasOwn(it, "_id") && Object.hasOwn(it, "name") && Object.hasOwn(it, "sentence") && Object.hasOwn(it, "cause")
         })) {
           throw Error("Response does not contain correct data")
         }
       }
       const prisonersAsType:Array<Prisoner> = prisoners.map((v) => { 
-        return {prisonerNumber:v._id, name:v.name, sentence:v.sentance, cause:v.cause}
+        return {prisonerNumber:v._id, name:v.name, sentence:v.sentence, cause:v.cause}
       })
       setPrisonerArray(prisonersAsType)
     } catch (error) {
@@ -75,7 +75,7 @@ function App() {
         <InfoPage prisonerArray={prisonerArray} setCurPage={setCurPage} setPrisonerInfo={setPrisonerInfo} errorHandler={errorHandler}/>
       }
       { curPage==="details" &&
-        <DetailsPage setCurPage={setCurPage} prisonerInfo={prisonerInfo} setPrisonerInfo={setPrisonerInfo}/>
+        <DetailsPage setCurPage={setCurPage} prisonerInfo={prisonerInfo} setPrisonerInfo={setPrisonerInfo} errorHandler={errorHandler}/>
       }
       { curPage==="add" &&
         <AddPage setCurPage={setCurPage} errorHandler={errorHandler} refreshPrisoners={refreshPrisoners}/>

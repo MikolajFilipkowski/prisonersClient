@@ -9,8 +9,9 @@ export default function PrisonerBox({prisonerInfo, setCurPage, setPrisonerInfo, 
 }) {
 
     function clickHandler() {
-        if (!(prisonerInfo.prisonerNumber && prisonerInfo.sentence && prisonerInfo.name && prisonerInfo.cause)) {
+        if (!(prisonerInfo.prisonerNumber && (typeof prisonerInfo.sentence=="number") && prisonerInfo.name && prisonerInfo.cause)) {
             errorHandler("Niepoprawne dane więźnia")
+            console.log(prisonerInfo)
         } else {
             setPrisonerInfo(prisonerInfo)
             setCurPage("details")

@@ -10,7 +10,7 @@ export default function AddPage({setCurPage, errorHandler, refreshPrisoners} : {
     refreshPrisoners:Function
 }) {
 
-    const [newPrisoner, setNewPrisoner] = useState({name:"", sentance:0, cause:""})
+    const [newPrisoner, setNewPrisoner] = useState({name:"", sentence:1, cause:""})
 
     function backToInfo() {
         setCurPage("info")
@@ -22,7 +22,7 @@ export default function AddPage({setCurPage, errorHandler, refreshPrisoners} : {
             url:"http://localhost:8080/api/users",
             data: {
                 name:newPrisoner.name,
-                sentance:newPrisoner.sentance,
+                sentence:newPrisoner.sentence,
                 cause:newPrisoner.cause
             }
         }).then(() => {
@@ -55,8 +55,9 @@ export default function AddPage({setCurPage, errorHandler, refreshPrisoners} : {
                     <input 
                         className="addInput addNumberInput"
                         type="number"
-                        value={newPrisoner.sentance}
-                        onChange={(e) => setNewPrisoner({...newPrisoner, sentance:parseInt(e.target.value)})}
+                        min={1}
+                        value={newPrisoner.sentence}
+                        onChange={(e) => setNewPrisoner({...newPrisoner, sentence:parseInt(e.target.value)})}
                         />
                 </label>
                 <label>
