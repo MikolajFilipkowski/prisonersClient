@@ -1,12 +1,11 @@
 import PrisonerBox from "../components/PrisonerBox"
-import info from "./info.json"
-import { v4 as uuidv4 } from 'uuid';
 import "./InfoPage.css"
 import { Prisoner } from "../types";
 
-export default function InfoPage({setCurPage, setPrisonerInfo, errorHandler} : {
+export default function InfoPage({setCurPage, setPrisonerInfo, prisonerArray, errorHandler} : {
   setCurPage: React.Dispatch<React.SetStateAction<string>>,
   setPrisonerInfo: React.Dispatch<React.SetStateAction<Prisoner>>,
+  prisonerArray: Array<Prisoner>
   errorHandler:Function
 }) {
   function gotoAdd() {
@@ -22,9 +21,9 @@ export default function InfoPage({setCurPage, setPrisonerInfo, errorHandler} : {
         <h1>Lista więźniów</h1>
         <div className="prisonerListContainer">
           {
-            info.map((v) => {
+            prisonerArray.map((v) => {
               return <PrisonerBox 
-                key={uuidv4()} 
+                key={v.prisonerNumber} 
                 prisonerInfo={v} 
                 setCurPage={setCurPage} 
                 setPrisonerInfo={setPrisonerInfo}

@@ -2,10 +2,12 @@ import "./AddPage.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons"
 import { useState } from "react"
+import axios from "axios"
 
-export default function AddPage({setCurPage, errorHandler} : {
+export default function AddPage({setCurPage, errorHandler, refreshPrisoners} : {
     setCurPage:React.Dispatch<React.SetStateAction<string>>,
-    errorHandler:Function
+    errorHandler:Function,
+    refreshPrisoners:Function
 }) {
 
     const [newPrisoner, setNewPrisoner] = useState({name:"", sentance:0, cause:""})
@@ -15,7 +17,21 @@ export default function AddPage({setCurPage, errorHandler} : {
     }
 
     function handleAdd() {
-        setCurPage("info")
+        axios({
+            method: "post",
+            url:"http://localhost:8080/api/users",
+            data: {
+                name:newPrisoner.name,
+                sentance:newPrisoner.sentance,
+                cause:newPrisoner.cause
+            }
+        }).then(() => {
+            refreshPrisoners()
+            setCurPage("info")
+        }, (err) => {
+            errorHandler("Niepoprawne dane")
+            console.log(err)
+        })
     }
 
     return (
